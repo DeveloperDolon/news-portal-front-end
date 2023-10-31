@@ -1,21 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useTheme from "../../Hooks/useTheme";
 
 const NavBar = () => {
 
     const handleThemeChange = useTheme();
 
-
     const navItems = <>
         <li>
             <NavLink to="/">Home</NavLink>
         </li>
+
         <li>
             <NavLink to="/add-news">Add News</NavLink>
         </li>
+
         <li>
             <NavLink to="/latest-news">Latest News</NavLink>
         </li>
+
         <li>
             <NavLink to="/about">About</NavLink>
         </li>
@@ -59,7 +61,7 @@ const NavBar = () => {
 
                 </label>
 
-                <a className="btn">Login</a>
+                <Link to="/login" className="btn">Login</Link>
             </div>
         </div>
     );

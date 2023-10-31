@@ -10,7 +10,7 @@ const Banner = () => {
         }} className="w-full">
             <div className="max-w-7xl h-[calc(100vh-68px)] mx-auto lg:px-0 md:px-5 px-3 grid md:grid-cols-2 grid-cols-1 place-items-center">
                 <div>
-                    <h1 className="md:text-5xl font-bold text-black">Hello world from my news portal web site</h1>
+                    <h1 className="md:text-5xl text-3xl font-bold text-black">Hello world from my news portal web site</h1>
 
                     <p className="mt-8 font-semibold text-black">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati voluptatem itaque numquam quisquam sunt inventore, doloremque ad cum nam non nisi laudantium voluptas amet aspernatur id, nulla hic similique. Ea?
