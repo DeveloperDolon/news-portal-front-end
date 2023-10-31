@@ -53,7 +53,14 @@ const SignUp = () => {
                 )
             }).catch(err => console.log(err));
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.message,
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        });
 
         
     }
@@ -75,7 +82,7 @@ const SignUp = () => {
                     </label>
                     
                     <label htmlFor="photo" className="text-lg font-bold">Photo Url
-                        <input type="text" required name="photo" className="input input-bordered input-success w-full bg-[#03132f9c] text-white md:text-base text-sm font-light mt-3 placeholder-violet-50"  placeholder="Type Photo Url" />
+                        <input type="text" name="photo" className="input input-bordered input-success w-full bg-[#03132f9c] text-white md:text-base text-sm font-light mt-3 placeholder-violet-50"  placeholder="Type Photo Url" />
                     </label>
                     
                     <label htmlFor="email" className="text-lg font-bold">Email

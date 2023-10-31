@@ -1,9 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import useTheme from "../../Hooks/useTheme";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
 
     const handleThemeChange = useTheme();
+    const [show, setShow] = useState(false);
+    const {user, logOut, setUser} = useContext(AuthContext);
+    const defaultUser = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&usqp=CAU";
 
     const navItems = <>
         <li>
@@ -22,6 +29,21 @@ const NavBar = () => {
             <NavLink to="/about">About</NavLink>
         </li>
     </>
+
+    const handleClick = () => {
+        setShow(!show);
+    }
+
+    const handleLogOut = () => {
+        logOut().then(() => {
+            Swal.fire(
+                'Good job!',
+                'Log Out Complete!',
+                'success'
+            )
+            setUser(null);
+        }).catch(err => console.log(err));
+    }
 
     return (
         <div className="navbar bg-base-100">
@@ -61,7 +83,18 @@ const NavBar = () => {
 
                 </label>
 
-                <Link to="/login" className="btn">Login</Link>
+                {
+                    user ? 
+                    <div className="relative">
+                        <img onClick={handleClick} className="rounded-full outline-red-400 outline-2 md:w-14 w-10 cursor-pointer" src={user?.photoURL ? user?.photoURL : defaultUser} alt="" />
+
+                        <div className={`absolute bg-slate-400 rounded-xl right-0 space-y-3 z-40 duration-300 overflow-hidden ${show ? "h-auto w-auto px-5 py-4" : "h-0 w-0 px-0 py-0"}`}>
+                            <p className="whitespace-nowrap text-white">{user?.displayName}</p>
+                            <button onClick={handleLogOut} className="whitespace-nowrap btn-sm bg-white rounded-lg">Log Out</button>
+                        </div>
+                    </div>
+                    : <Link to="/login" className="sm:btn btn-sm">Login</Link>
+                }
             </div>
         </div>
     );

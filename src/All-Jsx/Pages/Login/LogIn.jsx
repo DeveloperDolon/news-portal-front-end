@@ -2,11 +2,15 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const LogIn = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const {signInWIthEmailPassword} = useContext(AuthContext);
 
     const imgUrl = "https://img.freepik.com/free-vector/earth-blue-wave-background_1017-36678.jpg?w=900&t=st=1698734955~exp=1698735555~hmac=cc9d82f85524776dd65757ab40521929aedbe2a72935884c0e6eb3bbfabb31c5";
     
@@ -20,9 +24,22 @@ const LogIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-
-        const info = {email, password};
         
+        signInWIthEmailPassword(email, password)
+        .then(() => {
+            Swal.fire(
+                'Good job!',
+                'Log in Compleat!',
+                'success'
+            )
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.message,
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        })
     }
 
     return (
