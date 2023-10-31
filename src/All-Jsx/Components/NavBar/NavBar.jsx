@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import useTheme from "../../Hooks/useTheme";
 
 const NavBar = () => {
+
+    const handleThemeChange = useTheme();
+
 
     const navItems = <>
         <li>
@@ -39,7 +43,7 @@ const NavBar = () => {
                 <label
                     className="swap swap-rotate p-3 rounded-full shadow-md bg-slate-200">
 
-                    <input id="day-night" type="checkbox" />
+                    <input onClick={handleThemeChange} id="day-night" type="checkbox" />
 
                     <svg className="swap-on lg:w-6 lg:h-6 md:h-8 md:w-8 w-3 h-3"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
