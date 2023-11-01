@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const News = ({data}) => {
 
+    
     return (
         <div>
             <div className="overflow-hidden rounded-lg">
@@ -13,7 +14,7 @@ const News = ({data}) => {
                 <p className="font-semibold">Author : {data.author}</p>
                 <p className="font-semibold">{data.date_published}</p>
             </div>
-            <h1 className="text-3xl font-medium hover:underline"><Link>{data.headline}</Link></h1>
+            <h1 className="text-3xl font-medium hover:underline"><Link to={`/news/${data._id}`}>{data.headline}</Link></h1>
         </div>
     );
 };
