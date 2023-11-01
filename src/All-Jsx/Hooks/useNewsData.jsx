@@ -1,12 +1,14 @@
 
 import axios from "axios";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const mainUrl = "http://localhost:5000";
+
 
 const useNewsData = () => {
-    
+    const {mainUrl} = useContext(AuthContext);    
     const [news, setNews] = useState([]);
 
     useEffect(() => {

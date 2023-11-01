@@ -8,6 +8,7 @@ import LogIn from "../Pages/Login/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import SingleNews from "../Pages/SingleNews/SingleNews";
+import FavNews from "../Pages/FavNews/FavNews";
 
 const MainRoute = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const MainRoute = createBrowserRouter([
                 path: "/news/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`),
                 element: <PrivateRoute><SingleNews></SingleNews></PrivateRoute>
+            },
+            {
+                path: "/fav-news",
+                element: <PrivateRoute><FavNews></FavNews></PrivateRoute>
             }
         ]
     },
