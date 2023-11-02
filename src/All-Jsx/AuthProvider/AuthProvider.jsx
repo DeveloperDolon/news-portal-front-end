@@ -31,22 +31,24 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log("current user, ", currentUser);
             if(currentUser) {
                 const loggedUser = currentUser?.email || user?.email;
                 const user = {email: loggedUser};
+
                 setUser(currentUser);
-                setLoading(false);
                 
                 axios.post(`${mainUrl}/jwt`, user , {withCredentials: true})
                 .then((res) => console.log("token Response " ,res.data))
                 .catch(err => console.log(err.message))
             }
+            setLoading(false);
         });
 
         return () => {
             unsubscribe();
         }
-    }, [auth, user?.email])
+    }, [])
 
     const authData = {
         createUser,

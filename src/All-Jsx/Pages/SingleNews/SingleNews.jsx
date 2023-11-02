@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const SingleNews = () => {
     const {mainUrl, user} = useContext(AuthContext);
     const data = useLoaderData();
-    
+
     const handleAddToFavorite = () => {
 
         axios.post(`${mainUrl}/fav-news`, {
@@ -15,7 +15,7 @@ const SingleNews = () => {
             newsId: data?._id,
             newsTitle: data?.headline,
             newsImage: data?.image
-        }).then(res => {
+        }, {withCredentials: true}).then(res => {
             if(res.data.insertedId) {
                 toast.success('News Added to favorite!')
             }

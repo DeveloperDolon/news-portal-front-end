@@ -4,12 +4,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const NavBar = () => {
 
     const handleThemeChange = useTheme();
     const [show, setShow] = useState(false);
-    const { user, logOut, setUser } = useContext(AuthContext);
+    const { user, logOut, setUser, mainUrl} = useContext(AuthContext);
     const defaultUser = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&usqp=CAU";
 
     const navItems = <>
@@ -36,7 +37,14 @@ const NavBar = () => {
     }
 
     const handleLogOut = () => {
+        
+        axios.post(`${mainUrl}/logout`,{email: user.email}, {withCredentials: true})
+        .then(res => {
+            console.log(res);
+        }).catch(err => console.log(err.message));
+
         logOut().then(() => {
+            
             Swal.fire(
                 'Good job!',
                 'Log Out Complete!',
@@ -44,6 +52,7 @@ const NavBar = () => {
             )
             setUser(null);
         }).catch(err => console.log(err));
+
     }
 
     return (

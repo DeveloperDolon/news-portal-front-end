@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const PrivateRoute = ({children}) => {
-
     const {user, loading} = useContext(AuthContext);
     
     if(user) {
@@ -17,7 +16,7 @@ const PrivateRoute = ({children}) => {
         </div>
     }
 
-    return <Navigate to="/"></Navigate>
+    return <Navigate to={"/login"}></Navigate>
 };
 
 export default PrivateRoute;

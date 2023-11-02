@@ -13,13 +13,13 @@ const FavNews = () => {
 
 
     useEffect(() => {
-        axios.get(`${mainUrl}/fav-news?email=${user?.email}&sort=1`)
+        axios.get(`${mainUrl}/fav-news?email=${user?.email}&sort=1`, {withCredentials: true})
         .then(res => setFavNews(res.data))
         .catch(err => console.error(err))
     }, [mainUrl, user?.email]) 
     
     const handleDelete = (id) => {
-        axios.delete(`${mainUrl}/fav-news/${id}`)
+        axios.delete(`${mainUrl}/fav-news/${id}`, {withCredentials: true})
         .then(res => {
             if(res.data.acknowledged) {
                 toast.success("Deleted!");
@@ -30,7 +30,7 @@ const FavNews = () => {
     }
 
     const handleRead = (id) => {
-        axios.patch(`${mainUrl}/fav-news/${id}`, {status : true})
+        axios.patch(`${mainUrl}/fav-news/${id}`, {status : true}, {withCredentials: true})
         .then(res => {
             if(res.data.acknowledged) {
                 toast.success("Reading Success!!");
