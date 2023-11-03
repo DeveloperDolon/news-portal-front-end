@@ -9,6 +9,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import SingleNews from "../Pages/SingleNews/SingleNews";
 import FavNews from "../Pages/FavNews/FavNews";
+import AddNews from "../Pages/AddNews/AddNews";
 
 const MainRoute = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const MainRoute = createBrowserRouter([
             {
                 path: "/fav-news",
                 element: <PrivateRoute><FavNews></FavNews></PrivateRoute>
+            },
+            {
+                path: "/add-news",
+                element: <PrivateRoute><AddNews></AddNews></PrivateRoute>
             }
         ]
     },
