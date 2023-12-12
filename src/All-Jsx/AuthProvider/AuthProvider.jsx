@@ -40,7 +40,7 @@ const AuthProvider = ({children}) => {
                 
                 axios.post(`${mainUrl}/jwt`, user , {withCredentials: true})
                 .then((res) => console.log("token Response " ,res.data))
-                .catch(err => console.log(err.message))
+                .catch(err => console.log("This is the error",err.message))
             }
             setLoading(false);
         });

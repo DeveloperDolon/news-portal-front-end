@@ -22,7 +22,7 @@ const MainRoute = createBrowserRouter([
             }, 
             {
                 path: "/news/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`, {credentials: "include"}),
                 element: <PrivateRoute><SingleNews></SingleNews></PrivateRoute>
             },
             {

@@ -8,15 +8,27 @@ import { useEffect } from "react";
 
 
 const FavNews = () => {
-    const {mainUrl, user} = useContext(AuthContext);
+    const {mainUrl, user, logOut, setUser} = useContext(AuthContext);
     const [favNews, setFavNews] = useState([]);
 
 
     useEffect(() => {
         axios.get(`${mainUrl}/fav-news?email=${user?.email}&sort=1`, {withCredentials: true})
         .then(res => setFavNews(res.data))
-        .catch(err => console.error(err))
-    }, [mainUrl, user?.email]) 
+        .catch(err => { 
+            console.log("This is the error",err.response.status)
+            console.log(err.response.status === 401)
+            if(err.response.status === 401) {
+                logOut()
+                .then(() => {
+                    setUser(null);
+                    toast.success("You are logged out!!");
+                }) .catch(err => {
+                    console.log(err)
+                })
+            }
+        })
+    }, [logOut, mainUrl, user?.email]) 
     
     const handleDelete = (id) => {
         axios.delete(`${mainUrl}/fav-news/${id}`, {withCredentials: true})
@@ -46,7 +58,6 @@ const FavNews = () => {
     return (
         <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 md:mb-28 mb-20"> 
             <h1 className="md:text-5xl font-bold text-center md:my-16 my-10">All Favorite News</h1>
-
             <div className="grid grid-cols-1 gap-6">
                 {
                     favNews?.map(news => <div className="grid grid-cols-6  sm:gap-8 gap-3 bg-green-400 rounded-xl overflow-hidden place-items-center justify-start" key={news._id}>

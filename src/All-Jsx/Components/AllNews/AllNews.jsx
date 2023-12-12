@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const AllNews = () => {
     const [news , setNews] = useState([]);
-    const [itemsPerPage, setItemsPerPage] = useState(4);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
     const [currentPage, setCurrentPage] = useState(0);
     const [newsCount, setNewsCount] = useState(0);
     const {mainUrl} = useContext(AuthContext);
@@ -27,7 +27,7 @@ const AllNews = () => {
         axios.get(`${mainUrl}/all-news-count`)
         .then(res => setNewsCount(res.data.count))
         .catch(err => console.error(err))
-    }, [])
+    }, []);
 
     return (
         <div className="dark:text-white">
