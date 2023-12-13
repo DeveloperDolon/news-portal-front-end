@@ -9,6 +9,7 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
+    // const mainUrl = "https://planet-news-server.vercel.app";
     const mainUrl = "http://localhost:5000";
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
